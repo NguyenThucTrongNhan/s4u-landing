@@ -1,0 +1,65 @@
+@if (notFound()) {
+  <div class="not-found container">
+    <span>🎓</span>
+    <h1>Course not found</h1>
+    <a routerLink="/courses" class="btn btn-outline">← Back to Courses</a>
+  </div>
+}
+
+@if (course(); as c) {
+  <section class="course-header">
+    <div class="container">
+      <a routerLink="/courses" class="back-link">← Back to Courses</a>
+      <span class="tag">{{ c.category }}</span>
+      <h1 class="title">{{ c.title }}</h1>
+      <p class="summary">{{ c.summary }}</p>
+
+      <div class="meta-row">
+        <span><strong>Level:</strong> {{ c.level }}</span>
+        <span><strong>Duration:</strong> {{ c.duration }}</span>
+        <span><strong>Format:</strong> {{ c.format }}</span>
+        <span><strong>Fee:</strong> {{ c.priceLabel }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-grid">
+      <article class="detail-content">
+        <div class="card section-card">
+          <h2>Learning Outcomes</h2>
+          <ul>
+            @for (item of c.outcomes; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="card section-card">
+          <h2>Curriculum</h2>
+          <ul>
+            @for (item of c.curriculum; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </div>
+
+        <article class="card prose" [innerHTML]="c.detailHtml"></article>
+      </article>
+
+      <aside class="detail-sidebar">
+        <div class="card sidebar-card">
+          <h3>Need team training?</h3>
+          <p>We provide private cohorts for companies with custom schedules.</p>
+          <a routerLink="/contact" class="btn btn-primary">Book Team Session</a>
+        </div>
+
+        <div class="card sidebar-card">
+          <h3>Prefer subscription?</h3>
+          <p>Get all courses and tools with our subscription plans.</p>
+          <a routerLink="/pricing" class="btn btn-outline">View Pricing</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+}

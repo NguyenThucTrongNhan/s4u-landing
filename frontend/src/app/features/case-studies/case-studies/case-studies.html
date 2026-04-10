@@ -1,0 +1,17 @@
+<app-case-studies-hero />
+
+<section class="section section-sm">
+  <div class="container">
+    <app-case-studies-filters
+      [filters]="filters()"
+      [active]="activeFilter()"
+      (selectFilter)="setFilter($event)"
+    />
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <app-case-studies-grid [caseStudies]="filtered()" />
+  </div>
+</section>

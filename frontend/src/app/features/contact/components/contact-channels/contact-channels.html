@@ -1,0 +1,11 @@
+<div class="card channels-card">
+  <h2>Contact Channels</h2>
+  <ul>
+    @for (channel of channels; track channel.title) {
+      <li>
+        <strong>{{ channel.title }}</strong>
+        <span>{{ channel.value }}</span>
+      </li>
+    }
+  </ul>
+</div>

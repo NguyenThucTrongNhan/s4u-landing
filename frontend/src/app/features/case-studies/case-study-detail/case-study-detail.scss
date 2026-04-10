@@ -1,0 +1,147 @@
+.not-found {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+
+  span {
+    font-size: 3rem;
+  }
+}
+
+.case-header {
+  padding: 72px 0 48px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--dark-2) 0%, var(--dark) 100%);
+}
+
+.back-link {
+  display: inline-flex;
+  margin-bottom: 18px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.title {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  color: var(--white);
+  margin: 12px 0;
+  line-height: 1.2;
+}
+
+.summary {
+  color: var(--text-muted);
+  max-width: 760px;
+  font-size: 1.05rem;
+}
+
+.meta-row {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+
+  strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 28px;
+  align-items: start;
+}
+
+.case-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-card {
+  h2 {
+    color: var(--white);
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+
+  p,
+  li {
+    color: var(--text-muted);
+  }
+
+  ul {
+    margin-left: 18px;
+  }
+}
+
+.prose {
+  color: var(--text-muted);
+  line-height: 1.75;
+
+  h2 {
+    color: var(--white);
+    font-size: 1.3rem;
+    margin: 16px 0 10px;
+  }
+
+  p {
+    margin-bottom: 14px;
+  }
+}
+
+.case-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 96px;
+}
+
+.sidebar-card h3,
+.sidebar-cta h3 {
+  color: var(--white);
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-sm {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.sidebar-cta p {
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+@media (max-width: 1024px) {
+  .case-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .case-sidebar {
+    position: static;
+  }
+}

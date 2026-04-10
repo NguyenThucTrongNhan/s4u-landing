@@ -1,0 +1,31 @@
+.channels-card {
+  h2 {
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+
+  strong {
+    color: var(--white);
+    font-size: 0.9rem;
+  }
+
+  span {
+    color: var(--text-muted);
+    font-size: 0.86rem;
+  }
+}

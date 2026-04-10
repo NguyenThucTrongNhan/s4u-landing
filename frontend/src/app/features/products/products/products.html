@@ -1,0 +1,37 @@
+<section class="page-header">
+	<div class="container">
+		<span class="section-label">Product Suite</span>
+		<h1 class="section-title">AI & Cloud Products</h1>
+		<p class="section-desc">
+			Choose from battle-tested products to improve operations, customer experience, and growth.
+		</p>
+	</div>
+</section>
+
+<section class="section">
+	<div class="container">
+		<div class="products-grid">
+			@for (product of products(); track product.slug) {
+				<a [routerLink]="['/products', product.slug]" class="card product-card">
+					<div class="product-head">
+						<span class="tag">{{ product.category }}</span>
+						<span class="price">{{ product.priceLabel }}</span>
+					</div>
+
+					<h2>{{ product.name }}</h2>
+					<p>{{ product.summary }}</p>
+
+					<div class="product-audience">Best for: {{ product.audience }}</div>
+
+					<div class="feature-list">
+						@for (feature of product.features.slice(0, 3); track feature) {
+							<span class="feature-chip">{{ feature }}</span>
+						}
+					</div>
+
+					<span class="product-link">View details →</span>
+				</a>
+			}
+		</div>
+	</div>
+</section>

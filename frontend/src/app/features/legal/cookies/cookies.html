@@ -1,0 +1,32 @@
+<app-legal-hero
+  title="Cookie Policy"
+  description="This policy explains cookie categories and how you can manage cookie preferences."
+/>
+
+<section class="section">
+  <div class="container legal-stack">
+    <app-legal-section
+      title="What Cookies We Use"
+      [paragraphs]="[
+        'Essential cookies support authentication, security, and core functionality.',
+        'Analytics cookies help us improve product usability and performance.'
+      ]"
+    />
+
+    <app-legal-section
+      title="Your Choices"
+      [paragraphs]="[
+        'You can control optional cookies through browser settings or consent preferences.',
+        'Disabling some cookies may impact certain website features.'
+      ]"
+    />
+
+    <app-legal-section
+      title="Policy Updates"
+      [paragraphs]="[
+        'We may update this cookie policy as technologies and regulations evolve.',
+        'Major changes will be reflected with an updated effective date.'
+      ]"
+    />
+  </div>
+</section>

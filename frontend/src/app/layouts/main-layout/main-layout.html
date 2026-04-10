@@ -1,0 +1,75 @@
+<!-- Navbar -->
+<header class="navbar" [class.scrolled]="false">
+  <div class="container">
+    <a routerLink="/" class="logo" (click)="closeMenu()">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">AI<strong>Solutions</strong></span>
+    </a>
+
+    <nav class="nav-links" [class.open]="menuOpen()">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
+      <a routerLink="/articles" routerLinkActive="active" (click)="closeMenu()">Articles</a>
+      <a routerLink="/courses" routerLinkActive="active" (click)="closeMenu()">Courses</a>
+      <a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Products</a>
+      <a routerLink="/case-studies" routerLinkActive="active" (click)="closeMenu()">Case Studies</a>
+      <a routerLink="/pricing" routerLinkActive="active" (click)="closeMenu()">Pricing</a>
+      <a routerLink="/register" class="btn btn-outline" (click)="closeMenu()">Register</a>
+      <a routerLink="/demo" class="btn btn-primary" (click)="closeMenu()">Book Demo</a>
+    </nav>
+
+    <button class="hamburger" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Page content -->
+<main>
+  <router-outlet />
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">AI<strong>Solutions</strong></span>
+        <p>Empowering businesses with AI & Cloud technology.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a routerLink="/about">About Us</a>
+        <a routerLink="/case-studies">Case Studies</a>
+        <a routerLink="/articles">Articles</a>
+        <a routerLink="/courses">Courses</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a routerLink="/products">SaaS Products</a>
+        <a routerLink="/pricing">Pricing</a>
+        <a routerLink="/subscriptions/starter">Start Subscription</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a routerLink="/contact">Contact / Demo</a>
+        <a href="mailto:hello@aisolutions.com">hello&#64;aisolutions.com</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {{ currentYear }} AISolutions. All rights reserved.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; justify-content:center;">
+        <a routerLink="/privacy-policy">Privacy</a>
+        <a routerLink="/terms-of-service">Terms</a>
+        <a routerLink="/cookie-policy">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<app-float-contact-bar />

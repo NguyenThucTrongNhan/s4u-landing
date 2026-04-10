@@ -1,0 +1,68 @@
+.float-bar {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.float-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.float-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.float-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.float-phone {
+  background: linear-gradient(135deg, #0f766e, #0ea5a4);
+  color: #fff;
+}
+
+.float-zalo {
+  background: #0068ff;
+  color: #fff;
+}
+
+.float-zalo-icon {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.float-email {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .float-bar {
+    right: 12px;
+    bottom: 24px;
+  }
+}

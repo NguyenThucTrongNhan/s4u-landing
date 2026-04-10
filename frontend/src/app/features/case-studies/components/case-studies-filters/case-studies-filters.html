@@ -1,0 +1,11 @@
+<div class="filters-wrap">
+  @for (filter of filters; track filter) {
+    <button
+      class="filter-btn"
+      [class.active]="active === filter"
+      (click)="selectFilter.emit(filter)"
+    >
+      {{ filter }}
+    </button>
+  }
+</div>

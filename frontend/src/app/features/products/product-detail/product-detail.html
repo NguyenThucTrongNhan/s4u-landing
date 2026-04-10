@@ -1,0 +1,55 @@
+@if (notFound()) {
+  <div class="not-found container">
+    <span>📦</span>
+    <h1>Product not found</h1>
+    <a routerLink="/products" class="btn btn-outline">← Back to Products</a>
+  </div>
+}
+
+@if (product(); as p) {
+  <section class="product-header">
+    <div class="container">
+      <a routerLink="/products" class="back-link">← Back to Products</a>
+      <span class="tag">{{ p.category }}</span>
+      <h1 class="title">{{ p.name }}</h1>
+      <p class="summary">{{ p.summary }}</p>
+      <div class="header-meta">
+        <span>{{ p.priceLabel }}</span>
+        <span class="dot">·</span>
+        <span>{{ p.audience }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container detail-grid">
+      <article class="detail-content prose" [innerHTML]="p.descriptionHtml"></article>
+
+      <aside class="detail-sidebar">
+        <div class="card sidebar-card">
+          <h3>Key Features</h3>
+          <ul>
+            @for (feature of p.features; track feature) {
+              <li>{{ feature }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="card sidebar-card">
+          <h3>Expected Outcomes</h3>
+          <ul>
+            @for (outcome of p.outcomes; track outcome) {
+              <li>{{ outcome }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="card sidebar-cta">
+          <h3>Need a demo?</h3>
+          <p>Talk to our team and evaluate fit for your business.</p>
+          <a routerLink="/contact" class="btn btn-primary">Book Consultation</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+}

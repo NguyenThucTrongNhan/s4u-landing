@@ -1,0 +1,168 @@
+@if (notFound()) {
+  <section class="not-found container">
+    <span>🧾</span>
+    <h1>Subscription plan not found</h1>
+    <a routerLink="/pricing" class="btn btn-outline">← Back to Pricing</a>
+  </section>
+}
+
+@if (selectedPlan(); as plan) {
+  <section class="checkout-header">
+    <div class="container">
+      <a routerLink="/pricing" class="back-link">← Back to Pricing</a>
+      <span class="section-label">Subscription Checkout</span>
+      <h1 class="section-title">{{ plan.name }} Plan</h1>
+      <p class="section-desc">{{ plan.description }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container checkout-grid">
+      @if (!submitted()) {
+        <form class="card checkout-form" (ngSubmit)="submitSubscription()">
+          <h2>Application Details</h2>
+
+          <div class="form-grid">
+            <label>
+              <span>Company Name</span>
+              <input type="text" [(ngModel)]="companyName" name="companyName" required />
+            </label>
+
+            <label>
+              <span>Contact Email</span>
+              <input type="email" [(ngModel)]="contactEmail" name="contactEmail" required />
+            </label>
+
+            <label>
+              <span>Seats</span>
+              <input type="number" min="1" [(ngModel)]="seats" name="seats" required />
+            </label>
+
+            <div class="field-group">
+              <span>Deployment</span>
+              <div class="toggle-row">
+                <button type="button" class="toggle-btn" [class.active]="runMode() === 'cloud'" (click)="setRunMode('cloud')">Cloud Hosted</button>
+                <button type="button" class="toggle-btn" [class.active]="runMode() === 'standalone'" (click)="setRunMode('standalone')">Run Standalone App</button>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <span>Billing Cycle</span>
+              <div class="toggle-row">
+                <button type="button" class="toggle-btn" [class.active]="billingCycle() === 'monthly'" (click)="setBilling('monthly')">Monthly</button>
+                <button type="button" class="toggle-btn" [class.active]="billingCycle() === 'yearly'" (click)="setBilling('yearly')">Yearly</button>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <span>Payment Method</span>
+              <div class="toggle-row">
+                <button type="button" class="toggle-btn" [class.active]="paymentMethod() === 'card'" (click)="setPaymentMethod('card')">Card</button>
+                <button type="button" class="toggle-btn" [class.active]="paymentMethod() === 'bank'" (click)="setPaymentMethod('bank')">Bank</button>
+                <button type="button" class="toggle-btn" [class.active]="paymentMethod() === 'invoice'" (click)="setPaymentMethod('invoice')">Invoice</button>
+              </div>
+            </div>
+          </div>
+
+          @if (paymentMethod() === 'card') {
+            <div class="payment-panel">
+              <h3>Card Payment</h3>
+              <label>
+                <span>Card Number</span>
+                <input type="text" [(ngModel)]="cardNumber" name="cardNumber" placeholder="4242 4242 4242 4242" />
+              </label>
+              <label>
+                <span>Card Holder</span>
+                <input type="text" [(ngModel)]="cardHolder" name="cardHolder" />
+              </label>
+              <div class="inline-2">
+                <label>
+                  <span>Expiry</span>
+                  <input type="text" [(ngModel)]="expiry" name="expiry" placeholder="MM/YY" />
+                </label>
+                <label>
+                  <span>CVV</span>
+                  <input type="text" [(ngModel)]="cvv" name="cvv" placeholder="123" />
+                </label>
+              </div>
+            </div>
+          }
+
+          @if (paymentMethod() === 'bank') {
+            <div class="payment-panel">
+              <h3>Bank Transfer</h3>
+              <label>
+                <span>Account Name</span>
+                <input type="text" [(ngModel)]="bankAccountName" name="bankAccountName" />
+              </label>
+              <label>
+                <span>Transfer Reference</span>
+                <input type="text" [(ngModel)]="bankReference" name="bankReference" />
+              </label>
+            </div>
+          }
+
+          @if (paymentMethod() === 'invoice') {
+            <div class="payment-panel">
+              <h3>Invoice Billing</h3>
+              <label>
+                <span>Invoice Company Name</span>
+                <input type="text" [(ngModel)]="invoiceCompany" name="invoiceCompany" />
+              </label>
+              <label>
+                <span>Tax ID / VAT</span>
+                <input type="text" [(ngModel)]="invoiceTaxId" name="invoiceTaxId" />
+              </label>
+            </div>
+          }
+
+          <label>
+            <span>Notes</span>
+            <textarea rows="4" [(ngModel)]="note" name="note" placeholder="Any deployment, legal, or billing requirements"></textarea>
+          </label>
+
+          <button type="submit" class="btn btn-primary">Continue Subscription</button>
+          <p class="helper-text">For demo-only access, use Register page instead.</p>
+        </form>
+      } @else {
+        <div class="card success-card">
+          <h2>Subscription Request Received</h2>
+          <p>Your application has been recorded with the selected payment method. Our team will confirm activation details by email.</p>
+          <a routerLink="/pricing" class="btn btn-outline">Back to Pricing</a>
+        </div>
+      }
+
+      <aside class="card summary-card">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+          <span>Plan</span>
+          <strong>{{ plan.name }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Billing</span>
+          <strong>{{ getBillingLabel() }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Run Mode</span>
+          <strong>{{ runMode() === 'standalone' ? 'Standalone App' : 'Cloud Hosted' }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Method</span>
+          <strong>{{ paymentMethod() }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Unit Price</span>
+          <strong>${{ getUnitPrice() }}</strong>
+        </div>
+        <div class="summary-row">
+          <span>Seats</span>
+          <strong>{{ seats }}</strong>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <strong>${{ getTotalPrice() }}</strong>
+        </div>
+      </aside>
+    </div>
+  </section>
+}

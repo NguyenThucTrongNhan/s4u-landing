@@ -1,0 +1,17 @@
+<section class="section values-section">
+  <div class="container values-grid">
+    <div>
+      <span class="section-label">Our Values</span>
+      <h2 class="section-title">How We Work</h2>
+      <p class="values-intro">
+        We focus on sustainable execution, real business value, and long-term partnerships.
+      </p>
+    </div>
+
+    <ul class="card values-list">
+      @for (value of values; track value) {
+        <li>{{ value }}</li>
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,123 @@
+<!-- Page Header -->
+<section class="page-header">
+  <div class="container">
+    <span class="section-label">Knowledge Hub</span>
+    <h1 class="section-title">Articles &amp; Insights</h1>
+    <p class="section-desc">Deep dives into AI, Cloud, Business Technology, and Digital Transformation.</p>
+
+    <!-- Search -->
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input
+        type="search"
+        placeholder="Search articles..."
+        [value]="searchQuery()"
+        (input)="onSearch($any($event.target).value)"
+        class="search-input"
+        aria-label="Search articles"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- Category Filter -->
+<section class="filter-bar">
+  <div class="container">
+    <div class="category-tabs">
+      @for (cat of categories; track cat) {
+        <button
+          class="tab-btn"
+          [class.active]="activeCategory() === cat"
+          (click)="setCategory(cat)"
+        >
+          {{ cat }}
+          @if (cat === 'All') {
+            <span class="count">{{ all().length }}</span>
+          }
+        </button>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Article Grid -->
+<section class="section">
+  <div class="container">
+
+    @if (paginated().length === 0) {
+      <div class="empty-state">
+        <span>🔍</span>
+        <p>No articles found for <strong>"{{ searchQuery() }}"</strong>.</p>
+        <button class="btn btn-outline" (click)="onSearch(''); setCategory('All')">Clear filters</button>
+      </div>
+    } @else {
+      <div class="results-meta">
+        Showing {{ paginated().length }} of {{ filtered().length }} articles
+      </div>
+
+      <div class="articles-grid">
+        @for (article of paginated(); track article.slug) {
+          <a [routerLink]="['/articles', article.slug]" class="article-card card">
+            <div class="article-card-top">
+              <span class="tag">{{ article.category }}</span>
+              @if (article.featured) {
+                <span class="badge-featured">Featured</span>
+              }
+            </div>
+
+            <h2 class="article-title">{{ article.title }}</h2>
+            <p class="article-excerpt">{{ article.excerpt }}</p>
+
+            <div class="article-tags">
+              @for (tag of article.tags.slice(0, 3); track tag) {
+                <span class="tag-sm"># {{ tag }}</span>
+              }
+            </div>
+
+            <div class="article-meta">
+              <div class="author-info">
+                <div class="avatar">{{ article.author.name[0] }}</div>
+                <div>
+                  <div class="author-name">{{ article.author.name }}</div>
+                  <div class="author-role">{{ article.author.role }}</div>
+                </div>
+              </div>
+              <div class="meta-right">
+                <span>{{ article.publishedAt | date:'MMM d, y' }}</span>
+                <span class="dot">·</span>
+                <span>{{ article.readTimeMin }} min read</span>
+              </div>
+            </div>
+          </a>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages() > 1) {
+        <div class="pagination">
+          <button
+            class="page-btn"
+            [disabled]="currentPage() === 1"
+            (click)="goToPage(currentPage() - 1)"
+          >← Prev</button>
+
+          @for (page of pages(); track page) {
+            <button
+              class="page-btn"
+              [class.active]="currentPage() === page"
+              (click)="goToPage(page)"
+            >{{ page }}</button>
+          }
+
+          <button
+            class="page-btn"
+            [disabled]="currentPage() === totalPages()"
+            (click)="goToPage(currentPage() + 1)"
+          >Next →</button>
+        </div>
+      }
+    }
+
+  </div>
+</section>
+

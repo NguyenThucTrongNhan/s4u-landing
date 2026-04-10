@@ -1,0 +1,32 @@
+<app-legal-hero
+  title="Terms of Service"
+  description="These terms define the rules and responsibilities for using our platform and services."
+/>
+
+<section class="section">
+  <div class="container legal-stack">
+    <app-legal-section
+      title="Use of Services"
+      [paragraphs]="[
+        'You agree to use our services in compliance with applicable laws and regulations.',
+        'Unauthorized access, abuse, or reverse engineering attempts are prohibited.'
+      ]"
+    />
+
+    <app-legal-section
+      title="Subscriptions and Billing"
+      [paragraphs]="[
+        'Paid plans renew according to your selected billing cycle unless canceled.',
+        'Invoice and bank transfer terms may require manual verification before activation.'
+      ]"
+    />
+
+    <app-legal-section
+      title="Limitation of Liability"
+      [paragraphs]="[
+        'Services are provided as-is within the scope described in your agreement.',
+        'Liability is limited to the extent allowed by law and active service contracts.'
+      ]"
+    />
+  </div>
+</section>

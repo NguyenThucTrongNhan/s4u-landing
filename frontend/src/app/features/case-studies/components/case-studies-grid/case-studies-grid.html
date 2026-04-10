@@ -1,0 +1,14 @@
+<div class="grid">
+  @for (item of caseStudies; track item.slug) {
+    <a [routerLink]="['/case-studies', item.slug]" class="card case-card">
+      <div class="case-top">
+        <span class="tag">{{ item.category }}</span>
+        <span class="icon">{{ item.icon }}</span>
+      </div>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.summary }}</p>
+      <div class="meta">Client: {{ item.client }} · {{ item.duration }}</div>
+      <span class="link">Read case study →</span>
+    </a>
+  }
+</div>

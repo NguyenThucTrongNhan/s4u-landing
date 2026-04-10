@@ -1,0 +1,183 @@
+<!-- ===== AUTH SHELL ===== -->
+<div class="auth-page">
+
+  <!-- Header -->
+  <header class="auth-header">
+    <a routerLink="/" class="logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">AI<strong>Solutions</strong></span>
+    </a>
+    <span class="auth-header-hint">
+      Already have an account?
+      <a [href]="externalLoginUrl" class="auth-link">Sign in</a>
+    </span>
+  </header>
+
+  <!-- Main card -->
+  <main class="auth-main">
+    <div class="auth-card">
+
+      <!-- Progress indicator -->
+      <div class="auth-steps">
+        <div class="auth-step" [class.active]="step() >= 1" [class.done]="step() > 1">
+          <div class="step-dot">{{ step() > 1 ? '✓' : '1' }}</div>
+          <span>Choose product</span>
+        </div>
+        <div class="step-line" [class.done]="step() > 1"></div>
+        <div class="auth-step" [class.active]="step() >= 2">
+          <div class="step-dot">2</div>
+          <span>Your details</span>
+        </div>
+      </div>
+
+      <!-- ===== STEP 1: Product selection ===== -->
+      @if (step() === 1) {
+        <div class="step-pane">
+          <h1 class="auth-title">What would you like to register?</h1>
+          <p class="auth-subtitle">Select the product that fits your business needs. You can add more products later.</p>
+
+          <div class="products-grid">
+            @for (product of products; track product.id) {
+              <button
+                type="button"
+                class="product-card"
+                [class.selected]="selectedApp()?.id === product.id"
+                [style.--product-color]="product.color"
+                (click)="selectApp(product)">
+                <span class="product-icon">{{ product.icon }}</span>
+                <span class="product-name">{{ product.name }}</span>
+                <span class="product-tagline">{{ product.tagline }}</span>
+                @if (selectedApp()?.id === product.id) {
+                  <span class="product-check">✓</span>
+                }
+              </button>
+            }
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary btn-full btn-large"
+            [disabled]="!selectedApp()"
+            (click)="goToStep2()">
+            Continue with {{ selectedApp()?.name ?? 'selected product' }} →
+          </button>
+
+          <p class="auth-note">Not sure? <a routerLink="/products" class="auth-link">Compare all products</a></p>
+        </div>
+      }
+
+      <!-- ===== STEP 2: Account details ===== -->
+      @if (step() === 2 && !submitted()) {
+        <div class="step-pane">
+          <button type="button" class="back-btn" (click)="goBack()">← Back</button>
+
+          <h1 class="auth-title">Create your account</h1>
+          <p class="auth-subtitle">Fill in your details to get started with {{ selectedApp()!.name }}.</p>
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+
+            <div class="form-group">
+              <label for="application">Application</label>
+              <div class="select-wrapper disabled-select">
+                <span class="select-product-icon">{{ selectedApp()!.icon }}</span>
+                <select id="application" formControlName="application" [attr.disabled]="true">
+                  @for (product of products; track product.id) {
+                    <option [value]="product.id">{{ product.icon }} {{ product.name }} — {{ product.tagline }}</option>
+                  }
+                </select>
+                <span class="select-lock">🔒</span>
+              </div>
+              <span class="field-hint">← <button type="button" class="inline-back-btn" (click)="goBack()">Change application</button></span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Full name <span class="req">*</span></label>
+                <input id="fullName" type="text" formControlName="fullName" placeholder="John Doe"
+                  [class.invalid]="f['fullName'].invalid && f['fullName'].touched" />
+                @if (f['fullName'].invalid && f['fullName'].touched) {
+                  <span class="field-error">Full name is required (min 2 chars)</span>
+                }
+              </div>
+              <div class="form-group">
+                <label for="company">Company name <span class="req">*</span></label>
+                <input id="company" type="text" formControlName="company" placeholder="Acme Corp"
+                  [class.invalid]="f['company'].invalid && f['company'].touched" />
+                @if (f['company'].invalid && f['company'].touched) {
+                  <span class="field-error">Company name is required</span>
+                }
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Work email <span class="req">*</span></label>
+              <input id="email" type="email" formControlName="email" placeholder="you@company.com"
+                [class.invalid]="f['email'].invalid && f['email'].touched" />
+              @if (f['email'].invalid && f['email'].touched) {
+                <span class="field-error">Enter a valid email address</span>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone number <span class="opt">(optional)</span></label>
+              <input id="phone" type="tel" formControlName="phone" placeholder="+84 946 893 919"
+                [class.invalid]="f['phone'].invalid && f['phone'].touched" />
+              @if (f['phone'].invalid && f['phone'].touched) {
+                <span class="field-error">Enter a valid phone number</span>
+              }
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="password">Password <span class="req">*</span></label>
+                <input id="password" type="password" formControlName="password" placeholder="Min 8 characters"
+                  [class.invalid]="f['password'].invalid && f['password'].touched" />
+                @if (f['password'].invalid && f['password'].touched) {
+                  <span class="field-error">Password must be at least 8 characters</span>
+                }
+              </div>
+              <div class="form-group">
+                <label for="confirmPwd">Confirm password <span class="req">*</span></label>
+                <input id="confirmPwd" type="password" formControlName="confirmPwd" placeholder="Repeat password"
+                  [class.invalid]="(f['confirmPwd'].touched && form.hasError('passwordMismatch'))" />
+                @if (f['confirmPwd'].touched && form.hasError('passwordMismatch')) {
+                  <span class="field-error">Passwords do not match</span>
+                }
+              </div>
+            </div>
+
+            <div class="form-group form-check">
+              <input id="agree" type="checkbox" formControlName="agree" />
+              <label for="agree">
+                I agree to the <a routerLink="/terms-of-service" class="auth-link">Terms of Service</a>
+                and <a routerLink="/privacy-policy" class="auth-link">Privacy Policy</a>
+                <span class="req">*</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full btn-large" [disabled]="form.invalid">
+              Create Account
+            </button>
+
+          </form>
+        </div>
+      }
+
+      <!-- ===== SUCCESS STATE ===== -->
+      @if (submitted()) {
+        <div class="step-pane success-pane">
+          <div class="success-icon">🎉</div>
+          <h2 class="auth-title">Account created!</h2>
+          <p class="auth-subtitle">
+            Welcome aboard! Your <strong>{{ selectedApp()!.name }}</strong> account is being set up.
+            Check your email for the confirmation link.
+          </p>
+          <a [href]="externalLoginUrl" class="btn btn-primary btn-large">Go to Login →</a>
+        </div>
+      }
+
+    </div>
+  </main>
+
+</div>
+

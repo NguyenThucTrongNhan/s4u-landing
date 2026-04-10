@@ -1,0 +1,77 @@
+<section class="page-header">
+  <div class="container">
+    <span class="section-label">Pricing</span>
+    <h1 class="section-title">Plans & Subscription</h1>
+    <p class="section-desc">
+      Pick your plan, choose app run mode, and set the subscription method that fits your team.
+    </p>
+  </div>
+</section>
+
+<section class="section section-compact">
+  <div class="container controls-grid">
+    <div class="card control-card">
+      <h3>Billing Cycle</h3>
+      <div class="toggle-group">
+        <button class="toggle-btn" [class.active]="billingCycle() === 'monthly'" (click)="setBilling('monthly')">Monthly</button>
+        <button class="toggle-btn" [class.active]="billingCycle() === 'yearly'" (click)="setBilling('yearly')">Yearly (save)</button>
+      </div>
+    </div>
+
+    <div class="card control-card">
+      <h3>App Run Mode</h3>
+      <div class="toggle-group">
+        <button class="toggle-btn" [class.active]="runMode() === 'cloud'" (click)="setRunMode('cloud')">Cloud Hosted</button>
+        <button class="toggle-btn" [class.active]="runMode() === 'standalone'" (click)="setRunMode('standalone')">Run Standalone App</button>
+      </div>
+      <p class="hint">{{ getRunModeLabel() }}</p>
+    </div>
+
+    <div class="card control-card">
+      <h3>Subscription Method</h3>
+      <div class="toggle-group">
+        <button class="toggle-btn" [class.active]="subscriptionMethod() === 'card'" (click)="setMethod('card')">Card</button>
+        <button class="toggle-btn" [class.active]="subscriptionMethod() === 'bank'" (click)="setMethod('bank')">Bank Transfer</button>
+        <button class="toggle-btn" [class.active]="subscriptionMethod() === 'invoice'" (click)="setMethod('invoice')">Invoice</button>
+      </div>
+      <p class="hint">{{ getSubscriptionHint() }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="plans-grid">
+      @for (plan of plans; track plan.name) {
+        <article class="card plan-card" [class.featured]="plan.featured">
+          @if (plan.featured) {
+            <span class="badge">Most Popular</span>
+          }
+
+          <h2>{{ plan.name }}</h2>
+          <p class="plan-desc">{{ plan.description }}</p>
+          <div class="price-row">
+            <span class="price">${{ getPrice(plan) }}</span>
+            <span class="price-unit">/ seat / month</span>
+          </div>
+
+          <ul class="feature-list">
+            @for (feature of plan.features; track feature) {
+              <li>{{ feature }}</li>
+            }
+          </ul>
+
+          <a
+            [routerLink]="['/subscriptions', plan.id]"
+            [queryParams]="{ billing: billingCycle(), method: subscriptionMethod(), runMode: runMode() }"
+            class="btn"
+            [class.btn-primary]="plan.featured"
+            [class.btn-outline]="!plan.featured"
+          >
+            Select {{ plan.name }}
+          </a>
+        </article>
+      }
+    </div>
+  </div>
+</section>

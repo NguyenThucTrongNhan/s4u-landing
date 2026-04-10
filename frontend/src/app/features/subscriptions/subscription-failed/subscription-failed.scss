@@ -1,0 +1,29 @@
+.status-wrap {
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-card {
+  max-width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  h1 {
+    color: var(--white);
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

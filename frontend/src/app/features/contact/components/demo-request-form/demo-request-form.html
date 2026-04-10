@@ -1,0 +1,42 @@
+@if (!submitted()) {
+  <form class="card demo-form" (ngSubmit)="submit()">
+    <h2>Book a Demo</h2>
+
+    <label>
+      <span>Full Name</span>
+      <input type="text" [(ngModel)]="fullName" name="fullName" required />
+    </label>
+
+    <label>
+      <span>Work Email</span>
+      <input type="email" [(ngModel)]="email" name="email" required />
+    </label>
+
+    <label>
+      <span>Company</span>
+      <input type="text" [(ngModel)]="company" name="company" />
+    </label>
+
+    <label>
+      <span>Interest</span>
+      <select [(ngModel)]="interest" name="interest">
+        <option>Product Demo</option>
+        <option>Consulting</option>
+        <option>Course Training</option>
+        <option>Subscription Help</option>
+      </select>
+    </label>
+
+    <label>
+      <span>Message</span>
+      <textarea rows="4" [(ngModel)]="message" name="message"></textarea>
+    </label>
+
+    <button class="btn btn-primary" type="submit">Send Request</button>
+  </form>
+} @else {
+  <div class="card success-box">
+    <h2>Request Submitted</h2>
+    <p>Thank you. Our team will contact you within one business day.</p>
+  </div>
+}

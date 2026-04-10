@@ -1,0 +1,43 @@
+<section class="page-header">
+	<div class="container">
+		<span class="section-label">Learning Programs</span>
+		<h1 class="section-title">Courses & Training</h1>
+		<p class="section-desc">
+			Build practical skills in AI, cloud, and modern engineering with hands-on programs.
+		</p>
+	</div>
+</section>
+
+<section class="section">
+	<div class="container">
+		<div class="courses-grid">
+			@for (course of courses(); track course.slug) {
+				<a [routerLink]="['/courses', course.slug]" class="card course-card">
+					<div class="course-top">
+						<span class="tag">{{ course.category }}</span>
+						<span class="price">{{ course.priceLabel }}</span>
+					</div>
+
+					<h2>{{ course.title }}</h2>
+					<p>{{ course.summary }}</p>
+
+					<div class="course-meta">
+						<span>{{ course.level }}</span>
+						<span>·</span>
+						<span>{{ course.duration }}</span>
+						<span>·</span>
+						<span>{{ course.format }}</span>
+					</div>
+
+					<div class="chip-row">
+						@for (item of course.outcomes.slice(0, 2); track item) {
+							<span class="chip">{{ item }}</span>
+						}
+					</div>
+
+					<span class="course-link">View course detail →</span>
+				</a>
+			}
+		</div>
+	</div>
+</section>

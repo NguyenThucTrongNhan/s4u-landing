@@ -1,0 +1,32 @@
+<app-legal-hero
+  title="Privacy Policy"
+  description="This policy explains what data we collect, why we collect it, and how we protect it."
+/>
+
+<section class="section">
+  <div class="container legal-stack">
+    <app-legal-section
+      title="Information We Collect"
+      [paragraphs]="[
+        'We collect account, contact, and usage information necessary to provide our services.',
+        'Sensitive payment details are processed by trusted payment providers and not stored in plain form.'
+      ]"
+    />
+
+    <app-legal-section
+      title="How We Use Information"
+      [paragraphs]="[
+        'To deliver services, improve product performance, and communicate updates.',
+        'To meet legal obligations and maintain security of our systems.'
+      ]"
+    />
+
+    <app-legal-section
+      title="Data Rights"
+      [paragraphs]="[
+        'You may request access, correction, or deletion of your personal data.',
+        'Contact us at hello@aisolutions.com for privacy requests.'
+      ]"
+    />
+  </div>
+</section>

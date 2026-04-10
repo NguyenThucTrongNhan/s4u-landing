@@ -1,0 +1,122 @@
+@if (notFound()) {
+  <div class="not-found">
+    <span>📭</span>
+    <h1>Article not found</h1>
+    <a routerLink="/articles" class="btn btn-outline">← Back to Articles</a>
+  </div>
+}
+
+@if (article(); as a) {
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a routerLink="/">Home</a>
+      <span>/</span>
+      <a routerLink="/articles">Articles</a>
+      <span>/</span>
+      <span class="breadcrumb-current">{{ a.title }}</span>
+    </div>
+  </div>
+
+  <!-- Article Header -->
+  <header class="article-header">
+    <div class="container article-header-inner">
+      <span class="tag">{{ a.category }}</span>
+      <h1 class="article-title">{{ a.title }}</h1>
+      <p class="article-excerpt">{{ a.excerpt }}</p>
+
+      <div class="article-meta">
+        <div class="author-info">
+          <div class="avatar">{{ a.author.name[0] }}</div>
+          <div>
+            <div class="author-name">{{ a.author.name }}</div>
+            <div class="author-role">{{ a.author.role }}</div>
+          </div>
+        </div>
+        <div class="meta-right">
+          <span>{{ a.publishedAt | date:'MMMM d, y' }}</span>
+          <span class="dot">·</span>
+          <span>{{ a.readTimeMin }} min read</span>
+          <button class="share-btn" (click)="copyLink()" title="Copy link">🔗</button>
+        </div>
+      </div>
+
+      <div class="article-tags">
+        @for (tag of a.tags; track tag) {
+          <span class="tag-sm"># {{ tag }}</span>
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Body -->
+  <div class="article-layout">
+    <div class="container">
+      <div class="article-grid">
+
+        <!-- Content -->
+        <article class="article-content prose" [innerHTML]="a.content"></article>
+
+        <!-- Sidebar -->
+        <aside class="article-sidebar">
+          <!-- Author Card -->
+          <div class="card sidebar-card">
+            <div class="sidebar-avatar">{{ a.author.name[0] }}</div>
+            <h3>{{ a.author.name }}</h3>
+            <p class="author-role-sidebar">{{ a.author.role }}</p>
+            <a routerLink="/articles" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:12px; font-size:0.85rem;">
+              More articles
+            </a>
+          </div>
+
+          <!-- Tags -->
+          <div class="card sidebar-card">
+            <h4 class="sidebar-title">Tags</h4>
+            <div class="sidebar-tags">
+              @for (tag of a.tags; track tag) {
+                <span class="tag-sm"># {{ tag }}</span>
+              }
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="card sidebar-cta">
+            <h4>Need AI consulting?</h4>
+            <p>Talk to our team about your business challenges.</p>
+            <a routerLink="/contact" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:12px;">
+              Book Free Consultation
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Articles -->
+  @if (related().length > 0) {
+    <section class="related-section section">
+      <div class="container">
+        <h2 class="related-title">Related Articles</h2>
+        <div class="related-grid">
+          @for (rel of related(); track rel.slug) {
+            <a [routerLink]="['/articles', rel.slug]" class="card article-card-sm">
+              <span class="tag">{{ rel.category }}</span>
+              <h3>{{ rel.title }}</h3>
+              <p>{{ rel.excerpt }}</p>
+              <div class="meta-sm">{{ rel.publishedAt | date:'MMM d, y' }} · {{ rel.readTimeMin }} min read</div>
+            </a>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Back link -->
+  <div class="back-row">
+    <div class="container">
+      <a routerLink="/articles" class="btn btn-outline">← Back to Articles</a>
+    </div>
+  </div>
+}
+

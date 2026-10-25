@@ -40,7 +40,7 @@ export class Seo {
       url: `${this.doc.location.origin}/articles/${slug}`,
       publisher: {
         '@type': 'Organization',
-        name: 'AI Solutions',
+        name: 'S4U',
         url: this.doc.location.origin,
       },
     };
@@ -51,13 +51,13 @@ export class Seo {
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'Organization',
-      name: 'AI Solutions',
+      name: 'S4U',
       url: this.doc.location.origin,
-      description: 'AI consulting, cloud architecture, SaaS products, and AI training programs.',
-      sameAs: ['https://linkedin.com/company/aisolutions'],
+      description: 'Giải pháp quản lý công việc và tài liệu.',
+
       contactPoint: {
         '@type': 'ContactPoint',
-        email: 'hello@aisolutions.com',
+        email: 'nhan.nguyen@solution4u.top',
         contactType: 'customer support',
       },
     };

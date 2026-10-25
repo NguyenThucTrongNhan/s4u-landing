@@ -18,8 +18,8 @@ export class Products implements OnInit {
 
   ngOnInit(): void {
     this.seo.setPage(
-      'Products | AI & Cloud Solutions',
-      'Explore our AI and cloud products designed to accelerate growth and reduce operational overhead.',
+      'Sản phẩm | S4U',
+      'LawFirm và Document Platform: xem phạm vi và trao đổi pilot.',
       'ai products, cloud products, saas solutions'
     );
 

@@ -15,8 +15,8 @@ export class Contact implements OnInit {
 
   ngOnInit(): void {
     this.seo.setPage(
-      'Contact & Book Demo | AI Solutions',
-      'Contact our team for demos, consulting inquiries, and subscription guidance.',
+      'Liên hệ và demo | S4U',
+      'Trao đổi nhu cầu LawFirm và Document Platform qua email.',
       'contact ai solutions, book demo, consulting inquiry'
     );
   }

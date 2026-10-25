@@ -1,10 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { FloatContactBar } from '../../shared/components/float-contact-bar/float-contact-bar';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, FloatContactBar],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss',
 })

@@ -1,18 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Seo } from '../../../core/services/seo';
-import { LegalHero } from '../components/legal-hero/legal-hero';
-import { LegalSection } from '../components/legal-section/legal-section';
-
-@Component({
-  selector: 'app-privacy',
-  imports: [LegalHero, LegalSection],
-  templateUrl: './privacy.html',
-  styleUrl: './privacy.scss',
-})
-export class Privacy implements OnInit {
-  private readonly seo = inject(Seo);
-
-  ngOnInit(): void {
-    this.seo.setPage('Privacy Policy | AI Solutions', 'How AI Solutions collects and processes personal data.', 'privacy policy');
-  }
-}
+@Component({selector: 'app-privacy', template: `<section class="section container"><h1>Thông tin dữ liệu liên hệ</h1><p>Form demo chuẩn bị liên kết email trên trình duyệt. Website chưa có dịch vụ nhận form và không báo đã gửi yêu cầu.</p><p>Khi bạn gửi email, thông tin bạn chọn gửi được dùng để trao đổi nhu cầu và tổ chức demo. Không gửi hồ sơ khách hàng hoặc thông tin nhạy cảm.</p><p>Liên hệ về dữ liệu: <a href="mailto:nhan.nguyen@solution4u.top">nhan.nguyen&#64;solution4u.top</a>.</p><p>Chính sách cần được cập nhật trước khi bật dịch vụ nhận form, analytics hoặc thay đổi cách thu thập dữ liệu. Hạ tầng hosting có thể xử lý dữ liệu truy cập theo cấu hình của nhà cung cấp.</p></section>`})
+export class Privacy { constructor() { inject(Seo).setPage('Dữ liệu liên hệ | S4U', 'Thông tin về luồng liên hệ qua email của S4U.'); } }

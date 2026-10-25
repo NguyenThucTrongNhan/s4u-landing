@@ -1,23 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Seo } from '../../../core/services/seo';
-import { AboutHero } from '../components/about-hero/about-hero';
-import { AboutCapabilities } from '../components/about-capabilities/about-capabilities';
-import { AboutValues } from '../components/about-values/about-values';
-
-@Component({
-  selector: 'app-about',
-  imports: [AboutHero, AboutCapabilities, AboutValues],
-  templateUrl: './about.html',
-  styleUrl: './about.scss',
-})
-export class About implements OnInit {
-  private readonly seo = inject(Seo);
-
-  ngOnInit(): void {
-    this.seo.setPage(
-      'About Us | AI Solutions',
-      'Learn about our team, capabilities, and delivery approach for AI and cloud transformation.',
-      'about ai solutions, ai consulting company, cloud architecture team'
-    );
-  }
-}
+@Component({selector: 'app-about', imports: [RouterLink], templateUrl: './about.html', styleUrl: './about.scss'})
+export class About { constructor() { inject(Seo).setPage('Giới thiệu | S4U', 'Cách S4U xây dựng giải pháp quản lý công việc và tài liệu.'); } }

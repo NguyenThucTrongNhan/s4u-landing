@@ -1,4 +1,5 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, OnInit, DestroyRef, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../../core/models/product.model';
 import { ProductService } from '../../../core/services/product.service';
@@ -18,8 +19,12 @@ export class ProductDetail implements OnInit {
   product = signal<Product | null>(null);
   notFound = signal(false);
 
+  private destroyRef = inject(DestroyRef);
   ngOnInit(): void {
-    const slug = this.route.snapshot.paramMap.get('slug') ?? '';
+    this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
+    const slug = params.get('slug') ?? '';
+    this.product.set(null);
+    this.notFound.set(false);
     this.productService.getBySlug(slug).subscribe((item) => {
       if (!item) {
         this.notFound.set(true);
@@ -28,10 +33,11 @@ export class ProductDetail implements OnInit {
 
       this.product.set(item);
       this.seo.setPage(
-        `${item.name} | Product Details`,
+        `${item.name} | S4U`,
         item.summary,
         `${item.category}, ai product, cloud product, saas`
       );
+    });
     });
   }
 }

@@ -1,9 +1,9 @@
 <section class="page-header">
 	<div class="container">
-		<span class="section-label">Product Suite</span>
-		<h1 class="section-title">AI & Cloud Products</h1>
+		<span class="section-label">Sản phẩm S4U</span>
+		<h1 class="section-title">Giải pháp công việc và tài liệu</h1>
 		<p class="section-desc">
-			Choose from battle-tested products to improve operations, customer experience, and growth.
+			Trao đổi demo và thống nhất phạm vi pilot trước khi sử dụng thực tế.
 		</p>
 	</div>
 </section>
@@ -21,7 +21,7 @@
 					<h2>{{ product.name }}</h2>
 					<p>{{ product.summary }}</p>
 
-					<div class="product-audience">Best for: {{ product.audience }}</div>
+					<div class="product-audience">Dành cho: {{ product.audience }}</div>
 
 					<div class="feature-list">
 						@for (feature of product.features.slice(0, 3); track feature) {
@@ -29,7 +29,7 @@
 						}
 					</div>
 
-					<span class="product-link">View details →</span>
+					<span class="product-link">Xem chi tiết →</span>
 				</a>
 			}
 		</div>

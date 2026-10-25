@@ -1,42 +1,9 @@
-@if (!submitted()) {
-  <form class="card demo-form" (ngSubmit)="submit()">
-    <h2>Book a Demo</h2>
-
-    <label>
-      <span>Full Name</span>
-      <input type="text" [(ngModel)]="fullName" name="fullName" required />
-    </label>
-
-    <label>
-      <span>Work Email</span>
-      <input type="email" [(ngModel)]="email" name="email" required />
-    </label>
-
-    <label>
-      <span>Company</span>
-      <input type="text" [(ngModel)]="company" name="company" />
-    </label>
-
-    <label>
-      <span>Interest</span>
-      <select [(ngModel)]="interest" name="interest">
-        <option>Product Demo</option>
-        <option>Consulting</option>
-        <option>Course Training</option>
-        <option>Subscription Help</option>
-      </select>
-    </label>
-
-    <label>
-      <span>Message</span>
-      <textarea rows="4" [(ngModel)]="message" name="message"></textarea>
-    </label>
-
-    <button class="btn btn-primary" type="submit">Send Request</button>
-  </form>
-} @else {
-  <div class="card success-box">
-    <h2>Request Submitted</h2>
-    <p>Thank you. Our team will contact you within one business day.</p>
-  </div>
-}
+<form class="card demo-form" #form="ngForm" (ngSubmit)="$event.preventDefault()"><h2>Thông tin trao đổi</h2>
+<label>Họ tên<input [(ngModel)]="fullName" name="fullName" required maxlength="100" autocomplete="name" /></label>
+<label>Email<input type="email" [(ngModel)]="email" name="email" required email maxlength="254" autocomplete="email" /></label>
+<label>Công ty / Tổ chức<input [(ngModel)]="company" name="company" required maxlength="160" autocomplete="organization" /></label>
+<label>Quan tâm<select [(ngModel)]="interest" name="interest"><option value="lawfirm">LawFirm</option><option value="document-platform">Document Platform</option><option value="consulting">Tư vấn giải pháp</option></select></label>
+<label>Vấn đề muốn giải quyết<textarea [(ngModel)]="message" name="message" rows="4" maxlength="1200"></textarea></label>
+<p>Không nhập hồ sơ khách hàng hoặc dữ liệu nhạy cảm. Xem <a routerLink="/privacy-policy">thông tin xử lý dữ liệu liên hệ</a>.</p>
+@if (form.valid && fullName.trim() && company.trim()) {<a class="btn btn-primary" [href]="mailto">Mở email để gửi yêu cầu</a>} @else {<p role="status">Điền họ tên, email hợp lệ và tổ chức để chuẩn bị email.</p>}
+<p>Email chỉ được gửi khi bạn xác nhận trong ứng dụng email. Website không xác nhận đã tiếp nhận yêu cầu.</p></form>

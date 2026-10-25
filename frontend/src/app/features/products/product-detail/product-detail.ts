@@ -28,6 +28,7 @@ export class ProductDetail implements OnInit {
     this.productService.getBySlug(slug).subscribe((item) => {
       if (!item) {
         this.notFound.set(true);
+        this.seo.setPage('Không tìm thấy sản phẩm | S4U', 'Sản phẩm không tồn tại hoặc chưa được xuất bản.', '', false);
         return;
       }
 

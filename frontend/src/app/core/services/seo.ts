@@ -8,12 +8,17 @@ export class Seo {
   private meta = inject(Meta);
   private doc = inject(DOCUMENT);
 
-  setPage(pageTitle: string, description: string, keywords = '') {
+  setPage(pageTitle: string, description: string, keywords = '', indexable = true) {
+    this.doc.getElementById('article-schema')?.remove();
+    this.meta.updateTag({ name: 'robots', content: indexable ? 'index, follow' : 'noindex, follow' });
+    this.meta.updateTag({ property: 'og:site_name', content: 'S4U' });
     this.title.setTitle(pageTitle);
 
     this.meta.updateTag({ name: 'description', content: description });
     if (keywords) {
       this.meta.updateTag({ name: 'keywords', content: keywords });
+    } else {
+      this.meta.removeTag('name=keywords');
     }
 
     // Open Graph
@@ -22,13 +27,14 @@ export class Seo {
     this.meta.updateTag({ property: 'og:type', content: 'website' });
 
     // Twitter
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
     this.meta.updateTag({ name: 'twitter:title', content: pageTitle });
     this.meta.updateTag({ name: 'twitter:description', content: description });
   }
 
   setArticle(headline: string, description: string, author: string, datePublished: string, slug: string) {
     this.setPage(headline, description);
+    this.meta.updateTag({ property: 'og:type', content: 'article' });
 
     const schema = {
       '@context': 'https://schema.org',

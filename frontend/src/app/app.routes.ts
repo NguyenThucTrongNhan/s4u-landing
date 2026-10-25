@@ -11,6 +11,6 @@ export const routes: Routes = [{path: '', component: MainLayout, children: [
 {path: 'pricing', redirectTo: 'demo', pathMatch: 'full'},
 {path: 'register', redirectTo: 'demo', pathMatch: 'full'},
 {path: 'login', redirectTo: 'demo', pathMatch: 'full'},
-{path: 'subscriptions', redirectTo: 'demo', pathMatch: 'prefix'},
+{path: 'subscriptions', children: [{path: '**', redirectTo: '/demo'}]},
 {path: '**', loadComponent: () => import('./shared/components/not-found').then(m => m.NotFound)}
 ]}];

@@ -1,15 +1,15 @@
 @if (notFound()) {
   <div class="not-found container">
     <span>📦</span>
-    <h1>Product not found</h1>
-    <a routerLink="/products" class="btn btn-outline">← Back to Products</a>
+    <h1>Không tìm thấy sản phẩm</h1>
+    <a routerLink="/products" class="btn btn-outline">← Về danh sách sản phẩm</a>
   </div>
 }
 
 @if (product(); as p) {
   <section class="product-header">
     <div class="container">
-      <a routerLink="/products" class="back-link">← Back to Products</a>
+      <a routerLink="/products" class="back-link">← Về danh sách sản phẩm</a>
       <span class="tag">{{ p.category }}</span>
       <h1 class="title">{{ p.name }}</h1>
       <p class="summary">{{ p.summary }}</p>

@@ -13,7 +13,7 @@ describe('Public pilot routes', () => {
     expect(harness.routeNativeElement?.textContent).toContain('Doanh nghiệp cần quản lý');
     expect(harness.routeNativeElement?.querySelector('.sidebar-cta a')?.getAttribute('href')).toContain('product=document-platform');
     await harness.navigateByUrl('/products/missing');
-    expect(harness.routeNativeElement?.textContent).toContain('Product not found');
+    expect(harness.routeNativeElement?.textContent).toContain('Không tìm thấy sản phẩm');
     await harness.navigateByUrl('/products/lawfirm');
     expect(harness.routeNativeElement?.textContent).toContain('Công ty và văn phòng luật');
   });

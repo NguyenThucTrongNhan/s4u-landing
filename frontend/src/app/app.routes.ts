@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { MainLayout } from './layouts/main-layout/main-layout';
 export const routes: Routes = [{path: '', component: MainLayout, children: [
 {path: '', loadComponent: () => import('./features/landing/landing/landing').then(m => m.Landing)},
+{path: 'articles', loadComponent: () => import('./features/articles/articles/articles').then(m => m.Articles)},
+{path: 'articles/:slug', loadComponent: () => import('./features/articles/article-detail/article-detail').then(m => m.ArticleDetail)},
 {path: 'products', loadComponent: () => import('./features/products/products/products').then(m => m.Products)},
 {path: 'products/:slug', loadComponent: () => import('./features/products/product-detail/product-detail').then(m => m.ProductDetail)},
 {path: 'demo', loadComponent: () => import('./features/contact/contact/contact').then(m => m.Contact)},

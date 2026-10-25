@@ -1,4 +1,5 @@
-import { Component, inject, OnInit, signal, PLATFORM_ID } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, inject, OnInit, DestroyRef, signal, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { Article } from '../../../core/models/article.model';
@@ -21,12 +22,17 @@ export class ArticleDetail implements OnInit {
   related = signal<Article[]>([]);
   notFound = signal(false);
 
+  private destroyRef = inject(DestroyRef);
+  shareMessage = signal('');
   ngOnInit() {
-    const slug = this.route.snapshot.paramMap.get('slug') ?? '';
+    this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
+    const slug = params.get('slug') ?? '';
+    this.article.set(null); this.related.set([]); this.notFound.set(false); this.shareMessage.set('');
 
     this.articleService.getBySlug(slug).subscribe((data) => {
       if (!data) {
         this.notFound.set(true);
+        this.seo.setPage('Không tìm thấy bài viết | S4U', 'Bài viết chưa được xuất bản hoặc không tồn tại.', '', false);
         return;
       }
       this.article.set(data);
@@ -46,11 +52,15 @@ export class ArticleDetail implements OnInit {
         this.related.set(all.filter((a) => a.slug !== slug).slice(0, 3));
       });
     });
+    });
   }
 
-  copyLink() {
+  async copyLink() {
     if (isPlatformBrowser(this.platformId)) {
-      navigator.clipboard.writeText(window.location.href);
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        this.shareMessage.set('Đã sao chép liên kết.');
+      } catch { this.shareMessage.set('Không thể sao chép. Bạn có thể lấy liên kết từ thanh địa chỉ.'); }
     }
   }
 }

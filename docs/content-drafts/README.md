@@ -1,5 +1,3 @@
-# Article drafts
+# Approved articles
 
-Owner-approved display name: Nguyễn Thúc Trọng Nhân.
-
-These three original Vietnamese drafts are not exposed by public routes/assets. Content approval is pending. Do not invent a publication date, customer endorsement, measured outcome or product capability. Internal CTA paths are proposed for future publication. Review wording and metadata before moving approved content to the website.
+Author: Nguyễn Thúc Trọng Nhân. Owner approved all three drafts and instructed publication on 2026-10-25. Website source is frontend/src/app/core/services/article.service.ts; editorial notes and draft CTA labels are excluded from published content. Public CTAs select LawFirm for article 1 and Document Platform for articles 2 and 3. No customer endorsement, measured outcome or screenshots added.

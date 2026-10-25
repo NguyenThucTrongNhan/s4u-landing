@@ -25,3 +25,24 @@ describe('Public pilot routes', () => {
     expect(harness.routeNativeElement?.querySelector('a[href^="mailto:"]')).toBeTruthy();
   });
 });
+
+describe('Published articles', () => {
+  beforeEach(() => TestBed.configureTestingModule({ providers: [provideRouter(routes)] }));
+  it('shows approved author and updates content, schema and CTA between articles', async () => {
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/articles');
+    expect(harness.routeNativeElement?.textContent).toContain('Nguyễn Thúc Trọng Nhân');
+    await harness.navigateByUrl('/articles/quan-ly-vu-viec-va-deadline');
+    expect(harness.routeNativeElement?.querySelector('.sidebar-cta a')?.getAttribute('href')).toContain('product=lawfirm');
+    await harness.navigateByUrl('/articles/tai-lieu-ngu-canh-va-phan-quyen');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain('Lưu tài liệu tập trung');
+    expect(harness.routeNativeElement?.querySelector('.sidebar-cta a')?.getAttribute('href')).toContain('product=document-platform');
+    expect(document.getElementById('article-schema')?.textContent).toContain('Nguyễn Thúc Trọng Nhân');
+    await harness.navigateByUrl('/articles/missing');
+    expect(harness.routeNativeElement?.textContent).toContain('Không tìm thấy bài viết');
+    expect(document.getElementById('article-schema')).toBeNull();
+    await harness.navigateByUrl('/articles/ai-tai-lieu-chon-bai-toan-va-kiem-chung');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain('Ứng dụng AI');
+    expect(harness.routeNativeElement?.textContent).not.toContain('Bản nháp chờ');
+  });
+});

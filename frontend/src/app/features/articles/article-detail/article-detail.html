@@ -1,8 +1,8 @@
 @if (notFound()) {
   <div class="not-found">
     <span>📭</span>
-    <h1>Article not found</h1>
-    <a routerLink="/articles" class="btn btn-outline">← Back to Articles</a>
+    <h1>Không tìm thấy bài viết</h1>
+    <a routerLink="/articles" class="btn btn-outline">← Về danh sách bài viết</a>
   </div>
 }
 
@@ -10,9 +10,9 @@
   <!-- Breadcrumb -->
   <div class="breadcrumb">
     <div class="container">
-      <a routerLink="/">Home</a>
+      <a routerLink="/">Trang chủ</a>
       <span>/</span>
-      <a routerLink="/articles">Articles</a>
+      <a routerLink="/articles">Bài viết</a>
       <span>/</span>
       <span class="breadcrumb-current">{{ a.title }}</span>
     </div>
@@ -34,10 +34,10 @@
           </div>
         </div>
         <div class="meta-right">
-          <span>{{ a.publishedAt | date:'MMMM d, y' }}</span>
+          <span>{{ a.publishedAt | date:'dd/MM/yyyy' }}</span>
           <span class="dot">·</span>
-          <span>{{ a.readTimeMin }} min read</span>
-          <button class="share-btn" (click)="copyLink()" title="Copy link">🔗</button>
+          <span>{{ a.readTimeMin }} phút đọc</span>
+          <button class="share-btn" (click)="copyLink()" title="Sao chép liên kết" aria-label="Sao chép liên kết">🔗</button>
         </div>
       </div>
 
@@ -49,6 +49,7 @@
     </div>
   </header>
 
+  <p role="status" class="container">{{ shareMessage() }}</p>
   <!-- Article Body -->
   <div class="article-layout">
     <div class="container">
@@ -65,7 +66,7 @@
             <h3>{{ a.author.name }}</h3>
             <p class="author-role-sidebar">{{ a.author.role }}</p>
             <a routerLink="/articles" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:12px; font-size:0.85rem;">
-              More articles
+              Xem các bài khác
             </a>
           </div>
 
@@ -81,10 +82,10 @@
 
           <!-- CTA -->
           <div class="card sidebar-cta">
-            <h4>Need AI consulting?</h4>
-            <p>Talk to our team about your business challenges.</p>
-            <a routerLink="/contact" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:12px;">
-              Book Free Consultation
+            <h4>Muốn trao đổi nhu cầu?</h4>
+            <p>Chọn một vấn đề công việc hoặc tài liệu để cùng đánh giá phạm vi pilot.</p>
+            <a routerLink="/demo" [queryParams]="{product: a.productSlug}" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:12px;">
+              Trao đổi demo
             </a>
           </div>
         </aside>
@@ -93,18 +94,18 @@
     </div>
   </div>
 
-  <!-- Related Articles -->
+  <!-- Bài viết liên quan -->
   @if (related().length > 0) {
     <section class="related-section section">
       <div class="container">
-        <h2 class="related-title">Related Articles</h2>
+        <h2 class="related-title">Bài viết liên quan</h2>
         <div class="related-grid">
           @for (rel of related(); track rel.slug) {
             <a [routerLink]="['/articles', rel.slug]" class="card article-card-sm">
               <span class="tag">{{ rel.category }}</span>
               <h3>{{ rel.title }}</h3>
               <p>{{ rel.excerpt }}</p>
-              <div class="meta-sm">{{ rel.publishedAt | date:'MMM d, y' }} · {{ rel.readTimeMin }} min read</div>
+              <div class="meta-sm">{{ rel.publishedAt | date:'dd/MM/yyyy' }} · {{ rel.readTimeMin }} phút đọc</div>
             </a>
           }
         </div>
@@ -115,7 +116,7 @@
   <!-- Back link -->
   <div class="back-row">
     <div class="container">
-      <a routerLink="/articles" class="btn btn-outline">← Back to Articles</a>
+      <a routerLink="/articles" class="btn btn-outline">← Về danh sách bài viết</a>
     </div>
   </div>
 }

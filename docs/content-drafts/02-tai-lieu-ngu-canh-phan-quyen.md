@@ -1,13 +1,13 @@
 ---
-status: draft
+status: approved-for-publication
 author: Nguyễn Thúc Trọng Nhân
 prepared_at: 2026-10-25
-published_at: null
+published_at: 2026-10-25
 ---
 
 # Lưu tài liệu tập trung chưa đủ: cần thêm ngữ cảnh và phân quyền
 
-> Bản nháp chờ tác giả duyệt. Chưa xuất bản lên website.
+> Tác giả đã duyệt và yêu cầu xuất bản ngày 25/10/2026. Bản website bỏ ghi chú biên tập và trình bày CTA bằng component.
 
 Gom tài liệu vào một nơi giúp giảm phân tán, nhưng chưa trả lời được ba câu hỏi: tài liệu phục vụ công việc nào, phiên bản nào cần dùng và ai được truy cập? Một kế hoạch quản lý hồ sơ nên giải quyết cả ba câu hỏi này.
 

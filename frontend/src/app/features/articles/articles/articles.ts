@@ -23,7 +23,7 @@ export class Articles implements OnInit {
   currentPage = signal(1);
   readonly pageSize = 6;
 
-  categories: ArticleCategory[] = ['All', 'AI', 'Cloud', 'Business', 'Tutorial', 'News'];
+  categories: ArticleCategory[] = ['All', 'AI', 'Business'];
 
   filtered = computed(() => {
     const q = this.searchQuery().toLowerCase();
@@ -52,9 +52,9 @@ export class Articles implements OnInit {
 
   ngOnInit() {
     this.seo.setPage(
-      'Articles | AI & Tech Insights',
-      'Read the latest articles on AI, cloud architecture, digital transformation, and business technology.',
-      'AI articles, cloud tutorials, digital transformation, tech blog'
+      'Bài viết | S4U',
+      'Góc nhìn về quản lý vụ việc, tài liệu và ứng dụng AI có kiểm chứng.',
+      'quản lý vụ việc, deadline, tài liệu, phân quyền, AI, pilot'
     );
     this.articleService.getAll().subscribe((data) => this.all.set(data));
   }

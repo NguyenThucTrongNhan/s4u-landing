@@ -8,6 +8,7 @@ export interface Article {
   author: Author;
   publishedAt: string; // ISO date string
   readTimeMin: number;
+  productSlug: 'lawfirm' | 'document-platform';
   coverImage?: string;
   featured?: boolean;
   seo?: {

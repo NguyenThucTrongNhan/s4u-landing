@@ -1,13 +1,13 @@
 ---
-status: draft
+status: approved-for-publication
 author: Nguyễn Thúc Trọng Nhân
 prepared_at: 2026-10-25
-published_at: null
+published_at: 2026-10-25
 ---
 
 # Quản lý vụ việc và deadline trong công ty luật: bắt đầu số hóa từ đâu?
 
-> Bản nháp chờ tác giả duyệt. Chưa xuất bản lên website.
+> Tác giả đã duyệt và yêu cầu xuất bản ngày 25/10/2026. Bản website bỏ ghi chú biên tập và trình bày CTA bằng component.
 
 Một văn phòng luật có thể đang theo dõi vụ việc bằng nhiều bảng tính, trao đổi công việc qua tin nhắn và lưu hồ sơ ở các thư mục khác nhau. Khi bắt đầu số hóa, việc cần làm trước là chọn một luồng công việc có người chịu trách nhiệm và kết quả quan sát được.
 

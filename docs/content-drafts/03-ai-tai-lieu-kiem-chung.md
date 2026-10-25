@@ -1,13 +1,13 @@
 ---
-status: draft
+status: approved-for-publication
 author: Nguyễn Thúc Trọng Nhân
 prepared_at: 2026-10-25
-published_at: null
+published_at: 2026-10-25
 ---
 
 # Ứng dụng AI vào tài liệu: chọn bài toán nhỏ và kiểm chứng kết quả
 
-> Bản nháp chờ tác giả duyệt. Chưa xuất bản lên website.
+> Tác giả đã duyệt và yêu cầu xuất bản ngày 25/10/2026. Bản website bỏ ghi chú biên tập và trình bày CTA bằng component.
 
 AI có thể hỗ trợ đọc và trích xuất nội dung tài liệu, nhưng một bản demo trả lời trôi chảy chưa đủ để quyết định đưa vào công việc. Nên bắt đầu bằng một bài toán có đầu vào, đầu ra và cách đánh giá rõ ràng.
 
